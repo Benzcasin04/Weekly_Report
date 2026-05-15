@@ -24,9 +24,9 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
   const inputStyle = (field: string): React.CSSProperties => ({
     width: "100%",
     padding: "12px 16px",
-    background: "var(--bg)",
-    border: `1.5px solid ${focusedField === field ? "var(--accent)" : "var(--border2)"}`,
-    borderRadius: 9,
+    background: "var(--surface)",
+    border: `1.5px solid ${focusedField === field ? "var(--primary)" : "var(--border)"}`,
+    borderRadius: 8,
     color: "var(--text)",
     fontSize: 14,
     fontFamily: "inherit",
@@ -40,9 +40,9 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
         <div
           style={{
             fontSize: 11,
-            color: "var(--accent)",
+            color: "var(--text2)",
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
+            letterSpacing: "0.08em",
             fontWeight: 600,
             marginBottom: 12,
           }}
@@ -62,7 +62,7 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
           style={{
             background: "var(--surface)",
             border: "1px solid var(--border)",
-            borderRadius: 14,
+            borderRadius: 12,
             padding: "32px",
             display: "flex",
             flexDirection: "column",
@@ -75,14 +75,14 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
               style={{
                 display: "block",
                 fontSize: 11,
-                color: "var(--text3)",
+                color: "var(--text2)",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
+                letterSpacing: "0.08em",
                 fontWeight: 600,
                 marginBottom: 8,
               }}
             >
-              Name <span style={{ color: "var(--accent)" }}>*</span>
+              Name <span style={{ color: "var(--primary)" }}>*</span>
             </label>
             <input
               type="text"
@@ -102,14 +102,14 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
               style={{
                 display: "block",
                 fontSize: 11,
-                color: "var(--text3)",
+                color: "var(--text2)",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
+                letterSpacing: "0.08em",
                 fontWeight: 600,
                 marginBottom: 8,
               }}
             >
-              Weekly Note <span style={{ color: "var(--accent)" }}>*</span>
+              Weekly Note <span style={{ color: "var(--primary)" }}>*</span>
             </label>
             <textarea
               value={note}
@@ -124,7 +124,7 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
             <div
               style={{
                 fontSize: 11,
-                color: "var(--text3)",
+                color: "var(--text2)",
                 marginTop: 6,
                 textAlign: "right",
               }}
@@ -142,13 +142,13 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
                 padding: "13px 32px",
                 background:
                   loading || !name.trim() || !note.trim()
-                    ? "var(--border2)"
-                    : "var(--accent)",
+                    ? "var(--border)"
+                    : "var(--primary)",
                 color:
-                  loading || !name.trim() || !note.trim() ? "var(--text3)" : "#111",
+                  loading || !name.trim() || !note.trim() ? "var(--text2)" : "#fff",
                 border: "none",
-                borderRadius: 9,
-                fontWeight: 700,
+                borderRadius: 8,
+                fontWeight: 600,
                 fontSize: 14,
                 cursor:
                   loading || !name.trim() || !note.trim()
@@ -167,8 +167,8 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
                     style={{
                       width: 14,
                       height: 14,
-                      border: "2px solid #777",
-                      borderTopColor: "#111",
+                      border: "2px solid var(--border)",
+                      borderTopColor: "#fff",
                       borderRadius: "50%",
                       display: "inline-block",
                       animation: "spin 0.7s linear infinite",

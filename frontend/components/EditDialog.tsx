@@ -23,9 +23,9 @@ export function EditDialog({ report, onSave, onCancel }: EditDialogProps) {
   const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 12px",
-    background: "var(--bg)",
-    border: "1px solid var(--border2)",
-    borderRadius: 7,
+    background: "var(--surface)",
+    border: "1px solid var(--border)",
+    borderRadius: 8,
     color: "var(--text)",
     fontSize: 14,
     fontFamily: "inherit",
@@ -42,20 +42,20 @@ export function EditDialog({ report, onSave, onCancel }: EditDialogProps) {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <div>
-            <label style={{ fontSize: 12, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>
+            <label style={{ fontSize: 12, color: "var(--text2)", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>
               Name
             </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               style={inputStyle}
-              onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
+              onFocus={(e) => (e.target.style.borderColor = "var(--primary)")}
+              onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
             />
           </div>
 
           <div>
-            <label style={{ fontSize: 12, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>
+            <label style={{ fontSize: 12, color: "var(--text2)", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>
               Note
             </label>
             <textarea
@@ -63,8 +63,8 @@ export function EditDialog({ report, onSave, onCancel }: EditDialogProps) {
               onChange={(e) => setNote(e.target.value)}
               rows={5}
               style={{ ...inputStyle, resize: "vertical" }}
-              onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
+              onFocus={(e) => (e.target.style.borderColor = "var(--primary)")}
+              onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
             />
           </div>
         </div>
@@ -74,10 +74,10 @@ export function EditDialog({ report, onSave, onCancel }: EditDialogProps) {
             onClick={onCancel}
             style={{
               padding: "9px 20px",
-              borderRadius: 7,
-              border: "1px solid var(--border2)",
-              background: "transparent",
-              color: "var(--text2)",
+              borderRadius: 8,
+              border: "1px solid var(--border)",
+              background: "var(--surface)",
+              color: "var(--text)",
               cursor: "pointer",
               fontSize: 13,
               fontFamily: "inherit",
@@ -90,10 +90,10 @@ export function EditDialog({ report, onSave, onCancel }: EditDialogProps) {
             disabled={saving || !name.trim() || !note.trim()}
             style={{
               padding: "9px 20px",
-              borderRadius: 7,
+              borderRadius: 8,
               border: "none",
-              background: "var(--accent)",
-              color: "#111",
+              background: "var(--primary)",
+              color: "#fff",
               cursor: saving ? "not-allowed" : "pointer",
               fontSize: 13,
               fontWeight: 600,

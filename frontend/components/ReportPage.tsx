@@ -70,26 +70,26 @@ export function ReportPage({
 
   const btnStyle = (variant: "primary" | "ghost" | "danger" | "outline"): React.CSSProperties => ({
     padding: "8px 14px",
-    borderRadius: 7,
+    borderRadius: 8,
     border:
       variant === "ghost" || variant === "outline"
-        ? "1px solid var(--border2)"
+        ? "1px solid var(--border)"
         : "none",
     background:
       variant === "primary"
-        ? "var(--accent)"
+        ? "var(--primary)"
         : variant === "danger"
-        ? "rgba(232,85,85,0.12)"
+        ? "rgba(166,61,61,0.1)"
         : "transparent",
     color:
       variant === "primary"
-        ? "#111"
+        ? "#fff"
         : variant === "danger"
         ? "var(--danger)"
-        : "var(--text2)",
+        : "var(--text)",
     cursor: "pointer",
     fontSize: 12,
-    fontWeight: variant === "primary" ? 700 : 500,
+    fontWeight: variant === "primary" ? 600 : 500,
     fontFamily: "inherit",
     whiteSpace: "nowrap",
   });
@@ -101,9 +101,9 @@ export function ReportPage({
         <div
           style={{
             fontSize: 11,
-            color: "var(--accent)",
+            color: "var(--text2)",
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
+            letterSpacing: "0.08em",
             fontWeight: 600,
             marginBottom: 12,
           }}
@@ -126,7 +126,7 @@ export function ReportPage({
             <p style={{ color: "var(--text2)", marginTop: 8, fontSize: 14 }}>
               {reports.length} total entr{reports.length !== 1 ? "ies" : "y"}
               {someSelected && (
-                <span style={{ color: "var(--accent)", marginLeft: 8 }}>
+                <span style={{ color: "var(--primary)", marginLeft: 8 }}>
                   · {selected.size} selected
                 </span>
               )}
@@ -139,11 +139,11 @@ export function ReportPage({
               <span
                 style={{
                   padding: "8px 12px",
-                  background: "rgba(240,192,64,0.1)",
-                  border: "1px solid rgba(240,192,64,0.3)",
-                  borderRadius: 7,
+                  background: "var(--surface2)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 8,
                   fontSize: 11,
-                  color: "var(--accent)",
+                  color: "var(--text)",
                   fontWeight: 600,
                   display: "flex",
                   alignItems: "center",
@@ -182,7 +182,7 @@ export function ReportPage({
         style={{
           background: "var(--surface)",
           border: "1px solid var(--border)",
-          borderRadius: 14,
+          borderRadius: 12,
           overflow: "hidden",
         }}
       >
@@ -204,9 +204,9 @@ export function ReportPage({
             style={{
               flex: 1,
               padding: "8px 12px",
-              background: "var(--bg)",
-              border: "1px solid var(--border2)",
-              borderRadius: 7,
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderRadius: 8,
               color: "var(--text)",
               fontSize: 13,
               fontFamily: "inherit",
@@ -222,7 +222,7 @@ export function ReportPage({
               Clear selection
             </button>
           )}
-          <span style={{ fontSize: 12, color: "var(--text3)", marginLeft: "auto" }}>
+          <span style={{ fontSize: 12, color: "var(--text2)", marginLeft: "auto" }}>
             {filtered.length} result{filtered.length !== 1 ? "s" : ""}
           </span>
         </div>
@@ -250,9 +250,9 @@ export function ReportPage({
                     style={{
                       width: 16,
                       height: 16,
-                      border: `1.5px solid ${allSelected ? "var(--accent)" : "var(--border2)"}`,
+                      border: `1.5px solid ${allSelected ? "var(--primary)" : "var(--border)"}`,
                       borderRadius: 4,
-                      background: allSelected ? "var(--accent)" : "transparent",
+                      background: allSelected ? "var(--primary)" : "transparent",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -261,7 +261,7 @@ export function ReportPage({
                   >
                     {allSelected && (
                       <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                        <path d="M1 3.5L3.5 6L8 1" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M1 3.5L3.5 6L8 1" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
                   </div>
@@ -274,7 +274,7 @@ export function ReportPage({
                         padding: "11px 16px",
                         textAlign: "left",
                         fontSize: 11,
-                        color: "var(--text3)",
+                        color: "var(--text2)",
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
                         fontWeight: 600,
@@ -297,7 +297,7 @@ export function ReportPage({
                     style={{
                       borderBottom: "1px solid var(--border)",
                       background: isSelected
-                        ? "rgba(240,192,64,0.06)"
+                        ? "var(--surface2)"
                         : "transparent",
                       transition: "background 0.1s",
                     }}
@@ -308,9 +308,9 @@ export function ReportPage({
                         style={{
                           width: 16,
                           height: 16,
-                          border: `1.5px solid ${isSelected ? "var(--accent)" : "var(--border2)"}`,
+                          border: `1.5px solid ${isSelected ? "var(--primary)" : "var(--border)"}`,
                           borderRadius: 4,
-                          background: isSelected ? "var(--accent)" : "transparent",
+                          background: isSelected ? "var(--primary)" : "transparent",
                           cursor: "pointer",
                           display: "flex",
                           alignItems: "center",
@@ -320,7 +320,7 @@ export function ReportPage({
                       >
                         {isSelected && (
                           <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                            <path d="M1 3.5L3.5 6L8 1" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M1 3.5L3.5 6L8 1" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         )}
                       </div>
@@ -333,13 +333,13 @@ export function ReportPage({
                             height: 32,
                             borderRadius: "50%",
                             background: "var(--surface2)",
-                            border: "1px solid var(--border2)",
+                            border: "1px solid var(--border)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             fontSize: 12,
                             fontWeight: 700,
-                            color: "var(--accent)",
+                            color: "var(--primary)",
                             flexShrink: 0,
                           }}
                         >
@@ -394,10 +394,10 @@ export function ReportPage({
                           onClick={() => setEditReport(r)}
                           style={{
                             padding: "6px 12px",
-                            background: "var(--surface2)",
-                            border: "1px solid var(--border2)",
+                            background: "var(--surface)",
+                            border: "1px solid var(--border)",
                             borderRadius: 6,
-                            color: "var(--text2)",
+                            color: "var(--text)",
                             cursor: "pointer",
                             fontSize: 11,
                             fontFamily: "inherit",
@@ -410,8 +410,8 @@ export function ReportPage({
                           onClick={() => setDeleteId(r.id)}
                           style={{
                             padding: "6px 12px",
-                            background: "rgba(232,85,85,0.1)",
-                            border: "1px solid rgba(232,85,85,0.2)",
+                            background: "rgba(166,61,61,0.1)",
+                            border: "1px solid rgba(166,61,61,0.2)",
                             borderRadius: 6,
                             color: "var(--danger)",
                             cursor: "pointer",
@@ -435,7 +435,7 @@ export function ReportPage({
                     style={{
                       padding: "60px 20px",
                       textAlign: "center",
-                      color: "var(--text3)",
+                      color: "var(--text2)",
                     }}
                   >
                     <div style={{ fontSize: 32, marginBottom: 8 }}>🔍</div>

@@ -22,7 +22,7 @@ function StatCard({
     <div
       style={{
         background: "var(--surface)",
-        border: `1px solid ${accent ? "var(--accent)" : "var(--border)"}`,
+        border: `1px solid ${accent ? "var(--primary)" : "var(--border)"}`,
         borderRadius: 12,
         padding: "24px 28px",
         position: "relative",
@@ -37,16 +37,16 @@ function StatCard({
             left: 0,
             right: 0,
             height: 2,
-            background: "var(--accent)",
+            background: "var(--primary)",
           }}
         />
       )}
       <div
         style={{
           fontSize: 11,
-          color: "var(--text3)",
+          color: "var(--text2)",
           textTransform: "uppercase",
-          letterSpacing: "0.1em",
+          letterSpacing: "0.08em",
           marginBottom: 10,
           fontWeight: 500,
         }}
@@ -56,8 +56,8 @@ function StatCard({
       <div
         className="serif"
         style={{
-          fontSize: 36,
-          color: accent ? "var(--accent)" : "var(--text)",
+          fontSize: 48,
+          color: accent ? "var(--primary)" : "var(--text)",
           lineHeight: 1,
           marginBottom: 6,
         }}
@@ -65,7 +65,7 @@ function StatCard({
         {value}
       </div>
       {sub && (
-        <div style={{ fontSize: 12, color: "var(--text3)" }}>{sub}</div>
+        <div style={{ fontSize: 12, color: "var(--text2)" }}>{sub}</div>
       )}
     </div>
   );
@@ -99,9 +99,9 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
         <div
           style={{
             fontSize: 11,
-            color: "var(--accent)",
+            color: "var(--text2)",
             textTransform: "uppercase",
-            letterSpacing: "0.15em",
+            letterSpacing: "0.08em",
             fontWeight: 600,
             marginBottom: 12,
           }}
@@ -140,7 +140,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
         style={{
           background: "var(--surface)",
           border: "1px solid var(--border)",
-          borderRadius: 14,
+          borderRadius: 12,
           padding: "28px 32px",
           marginBottom: 32,
         }}
@@ -148,9 +148,9 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
         <div
           style={{
             fontSize: 12,
-            color: "var(--text3)",
+            color: "var(--text2)",
             textTransform: "uppercase",
-            letterSpacing: "0.1em",
+            letterSpacing: "0.08em",
             marginBottom: 20,
             fontWeight: 500,
           }}
@@ -162,11 +162,11 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
             onClick={() => onNavigate("add")}
             style={{
               padding: "12px 24px",
-              background: "var(--accent)",
-              color: "#111",
+              background: "var(--primary)",
+              color: "#fff",
               border: "none",
               borderRadius: 8,
-              fontWeight: 700,
+              fontWeight: 600,
               fontSize: 13,
               cursor: "pointer",
               fontFamily: "inherit",
@@ -181,9 +181,9 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
             onClick={() => onNavigate("report")}
             style={{
               padding: "12px 24px",
-              background: "var(--surface2)",
+              background: "var(--surface)",
               color: "var(--text)",
-              border: "1px solid var(--border2)",
+              border: "1px solid var(--border)",
               borderRadius: 8,
               fontWeight: 500,
               fontSize: 13,
@@ -200,9 +200,9 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
             onClick={onExportExcel}
             style={{
               padding: "12px 24px",
-              background: "var(--surface2)",
+              background: "var(--surface)",
               color: "var(--text)",
-              border: "1px solid var(--border2)",
+              border: "1px solid var(--border)",
               borderRadius: 8,
               fontWeight: 500,
               fontSize: 13,
@@ -224,7 +224,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           style={{
             background: "var(--surface)",
             border: "1px solid var(--border)",
-            borderRadius: 14,
+            borderRadius: 12,
             overflow: "hidden",
           }}
         >
@@ -240,9 +240,9 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
             <span
               style={{
                 fontSize: 12,
-                color: "var(--text3)",
+                color: "var(--text2)",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
+                letterSpacing: "0.08em",
                 fontWeight: 500,
               }}
             >
@@ -253,7 +253,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               style={{
                 background: "none",
                 border: "none",
-                color: "var(--accent)",
+                color: "var(--text)",
                 fontSize: 12,
                 cursor: "pointer",
                 fontFamily: "inherit",
@@ -278,13 +278,13 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
                   height: 36,
                   borderRadius: "50%",
                   background: "var(--surface2)",
-                  border: "1px solid var(--border2)",
+                  border: "1px solid var(--border)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: 14,
                   fontWeight: 700,
-                  color: "var(--accent)",
+                  color: "var(--primary)",
                   flexShrink: 0,
                 }}
               >
@@ -316,7 +316,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               <div
                 style={{
                   fontSize: 11,
-                  color: "var(--text3)",
+                  color: "var(--text2)",
                   whiteSpace: "nowrap",
                   alignSelf: "flex-start",
                   marginTop: 2,
@@ -337,7 +337,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           style={{
             textAlign: "center",
             padding: "60px 20px",
-            color: "var(--text3)",
+            color: "var(--text2)",
           }}
         >
           <div style={{ fontSize: 40, marginBottom: 12 }}>📝</div>

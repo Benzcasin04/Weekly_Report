@@ -25,8 +25,6 @@ function formatDateShort(iso: string) {
   });
 }
 
-const PAGE_SIZE = 5;
-
 // ── 3-dot Dropdown Menu ────────────────────────────────────
 function ActionsMenu({
   onEdit,
@@ -188,6 +186,7 @@ export function ReportPage({
   const [search, setSearch] = useState("");
   const [filterDate, setFilterDate] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5); // ← rows-per-page state
 
   const filtered = useMemo(() => {
     return reports.filter((r) => {
@@ -201,12 +200,14 @@ export function ReportPage({
     });
   }, [reports, search, filterDate]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  // Use dynamic pageSize instead of hardcoded PAGE_SIZE
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const safePage = Math.min(currentPage, totalPages);
-  const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const paginated = filtered.slice((safePage - 1) * pageSize, safePage * pageSize);
 
   const handleSearch = (v: string) => { setSearch(v); setCurrentPage(1); };
   const handleFilterDate = (v: string) => { setFilterDate(v); setCurrentPage(1); };
+  const handlePageSize = (v: number) => { setPageSize(v); setCurrentPage(1); }; // ← reset to page 1 on size change
   const clearFilters = () => { setSearch(""); setFilterDate(""); setCurrentPage(1); setSelected(new Set()); };
 
   const allSelected = paginated.length > 0 && paginated.every((r) => selected.has(r.id));
@@ -519,18 +520,51 @@ export function ReportPage({
         )}
       </div>
 
-      {/* ── Pagination ── */}
-      {totalPages > 1 && (
-        <div style={{
-          background: "var(--surface)", border: "1px solid var(--border)",
-          borderTop: "1px solid var(--border)", borderRadius: "0 0 12px 12px",
-          padding: "12px 16px",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          flexWrap: "wrap", gap: 10,
-        }}>
-          <span style={{ fontSize: 12, color: "var(--text2)" }}>
+      {/* ── Pagination (always visible) ── */}
+      <div style={{
+        background: "var(--surface)", border: "1px solid var(--border)",
+        borderTop: "1px solid var(--border)", borderRadius: "0 0 12px 12px",
+        padding: "12px 16px",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        flexWrap: "wrap", gap: 10,
+      }}>
+
+        {/* Left side: page info + rows-per-page selector */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+          <span style={{ fontSize: 12, color: "var(--text2)", whiteSpace: "nowrap" }}>
             Page {safePage} of {totalPages} · {filtered.length} result{filtered.length !== 1 ? "s" : ""}
           </span>
+
+          {/* Rows per page */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 12, color: "var(--text2)", whiteSpace: "nowrap" }}>
+              Rows per page:
+            </span>
+            <select
+              value={pageSize}
+              onChange={(e) => handlePageSize(Number(e.target.value))}
+              style={{
+                padding: "4px 8px",
+                borderRadius: 6,
+                border: "1px solid var(--border)",
+                background: "var(--bg)",
+                color: "var(--text)",
+                fontSize: 12,
+                fontFamily: "inherit",
+                cursor: "pointer",
+                outline: "none",
+                appearance: "auto",
+              }}
+            >
+              {[5, 10, 15, 20, 25].map((n) => (
+                <option key={n} value={n}>{n}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Right side: page buttons (only when more than 1 page) */}
+        {totalPages > 1 && (
           <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
             <PageBtn label="←" onClick={() => setCurrentPage(safePage - 1)} disabled={safePage === 1} />
             {getPageNumbers().map((p, i) =>
@@ -542,8 +576,8 @@ export function ReportPage({
             )}
             <PageBtn label="→" onClick={() => setCurrentPage(safePage + 1)} disabled={safePage === totalPages} />
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* ── Dialogs ── */}
       {viewReport && (

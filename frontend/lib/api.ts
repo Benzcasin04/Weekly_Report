@@ -19,6 +19,8 @@ export const api = {
     return res.json();
   },
 
+  // see none
+
   update: async (
     id: string,
     data: { name: string; note: string }

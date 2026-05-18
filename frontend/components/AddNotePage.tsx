@@ -95,8 +95,8 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
               required
             />
           </div>
-
-          {/* Note Field */}
+            
+          {/* Note Field */} 
           <div>
             <label
               style={{

@@ -24,7 +24,7 @@ function StatCard({
         background: "var(--surface)",
         border: `1px solid ${accent ? "var(--primary)" : "var(--border)"}`,
         borderRadius: 12,
-        padding: "24px 28px",
+        padding: "20px 22px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -33,9 +33,7 @@ function StatCard({
         <div
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
+            top: 0, left: 0, right: 0,
             height: 2,
             background: "var(--primary)",
           }}
@@ -43,20 +41,19 @@ function StatCard({
       )}
       <div
         style={{
-          fontSize: 11,
+          fontSize: 10,
           color: "var(--text2)",
           textTransform: "uppercase",
           letterSpacing: "0.08em",
-          marginBottom: 10,
+          marginBottom: 8,
           fontWeight: 500,
         }}
       >
         {label}
       </div>
       <div
-        className="serif"
+        className="serif stat-value"
         style={{
-          fontSize: 48,
           color: accent ? "var(--primary)" : "var(--text)",
           lineHeight: 1,
           marginBottom: 6,
@@ -93,9 +90,10 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
   const uniqueNames = new Set(reports.map((r) => r.name)).size;
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto" }}>
-      {/* Hero */}
-      <div style={{ marginBottom: 48 }}>
+    <div style={{ maxWidth: 900, margin: "0 auto", width: "100%" }}>
+
+      {/* ── Hero ── */}
+      <div style={{ marginBottom: "clamp(24px, 5vw, 48px)" }}>
         <div
           style={{
             fontSize: 11,
@@ -103,65 +101,61 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
             textTransform: "uppercase",
             letterSpacing: "0.08em",
             fontWeight: 600,
-            marginBottom: 12,
+            marginBottom: 10,
           }}
         >
           Dashboard
         </div>
         <h1
           className="serif"
-          style={{ fontSize: 48, lineHeight: 1.1, marginBottom: 12 }}
+          style={{
+            fontSize: "clamp(28px, 6vw, 48px)",
+            lineHeight: 1.1,
+            marginBottom: 10,
+          }}
         >
           Weekly Overview
         </h1>
-        <p style={{ color: "var(--text2)", fontSize: 16, maxWidth: 520 }}>
-          Track, manage, and export your team&apos;s weekly progress notes in one
-          place.
+        <p style={{ color: "var(--text2)", fontSize: "clamp(13px, 2vw, 16px)", maxWidth: 520 }}>
+          Track, manage, and export your team&apos;s weekly progress notes in one place.
         </p>
       </div>
 
-      {/* Stats */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: 16,
-          marginBottom: 40,
-        }}
-      >
+      {/* ── Stats Grid ── */}
+      <div className="stats-grid" style={{ marginBottom: "clamp(20px, 4vw, 40px)" }}>
         <StatCard label="Total Notes" value={reports.length} accent />
         <StatCard label="This Week" value={thisWeek} sub="new entries" />
         <StatCard label="Contributors" value={uniqueNames} sub="unique names" />
         <StatCard label="Last Updated" value={lastUpdated} />
       </div>
 
-      {/* Actions */}
+      {/* ── Quick Actions ── */}
       <div
         style={{
           background: "var(--surface)",
           border: "1px solid var(--border)",
           borderRadius: 12,
-          padding: "28px 32px",
-          marginBottom: 32,
+          padding: "clamp(18px, 3vw, 28px) clamp(16px, 3vw, 32px)",
+          marginBottom: "clamp(16px, 3vw, 32px)",
         }}
       >
         <div
           style={{
-            fontSize: 12,
+            fontSize: 11,
             color: "var(--text2)",
             textTransform: "uppercase",
             letterSpacing: "0.08em",
-            marginBottom: 20,
+            marginBottom: 16,
             fontWeight: 500,
           }}
         >
           Quick Actions
         </div>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <div className="actions-row">
           <button
             onClick={() => onNavigate("add")}
             style={{
-              padding: "12px 24px",
+              padding: "11px 20px",
               background: "var(--primary)",
               color: "#fff",
               border: "none",
@@ -173,6 +167,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               display: "flex",
               alignItems: "center",
               gap: 8,
+              whiteSpace: "nowrap",
             }}
           >
             <span style={{ fontSize: 16 }}>+</span> Add Note
@@ -180,7 +175,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           <button
             onClick={() => onNavigate("report")}
             style={{
-              padding: "12px 24px",
+              padding: "11px 20px",
               background: "var(--surface)",
               color: "var(--text)",
               border: "1px solid var(--border)",
@@ -192,6 +187,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               display: "flex",
               alignItems: "center",
               gap: 8,
+              whiteSpace: "nowrap",
             }}
           >
             <span>📋</span> View Report
@@ -199,7 +195,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           <button
             onClick={onExportExcel}
             style={{
-              padding: "12px 24px",
+              padding: "11px 20px",
               background: "var(--surface)",
               color: "var(--text)",
               border: "1px solid var(--border)",
@@ -211,6 +207,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               display: "flex",
               alignItems: "center",
               gap: 8,
+              whiteSpace: "nowrap",
             }}
           >
             <span>⬇</span> Export All to Excel
@@ -218,7 +215,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
         </div>
       </div>
 
-      {/* Recent entries */}
+      {/* ── Recent Entries ── */}
       {reports.length > 0 && (
         <div
           style={{
@@ -230,7 +227,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
         >
           <div
             style={{
-              padding: "16px 24px",
+              padding: "14px 20px",
               borderBottom: "1px solid var(--border)",
               display: "flex",
               justifyContent: "space-between",
@@ -239,7 +236,7 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           >
             <span
               style={{
-                fontSize: 12,
+                fontSize: 11,
                 color: "var(--text2)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
@@ -262,27 +259,30 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               View all →
             </button>
           </div>
+
           {reports.slice(0, 4).map((r) => (
             <div
               key={r.id}
               style={{
-                padding: "16px 24px",
+                padding: "14px 20px",
                 borderBottom: "1px solid var(--border)",
                 display: "flex",
-                gap: 16,
+                gap: 14,
+                alignItems: "flex-start",
               }}
             >
+              {/* Avatar */}
               <div
                 style={{
-                  width: 36,
-                  height: 36,
+                  width: 34,
+                  height: 34,
                   borderRadius: "50%",
                   background: "var(--surface2)",
                   border: "1px solid var(--border)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 700,
                   color: "var(--primary)",
                   flexShrink: 0,
@@ -290,21 +290,48 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
               >
                 {r.name.charAt(0).toUpperCase()}
               </div>
+
+              {/* Content */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div
                   style={{
-                    fontWeight: 600,
-                    color: "var(--text)",
-                    fontSize: 13,
-                    marginBottom: 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: 8,
+                    marginBottom: 3,
                   }}
                 >
-                  {r.name}
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: "var(--text)",
+                      fontSize: 13,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {r.name}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      color: "var(--text2)",
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {new Date(r.created_at).toLocaleDateString("en-PH", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
                 </div>
                 <div
                   style={{
                     color: "var(--text2)",
-                    fontSize: 13,
+                    fontSize: 12,
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -312,20 +339,6 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
                 >
                   {r.note}
                 </div>
-              </div>
-              <div
-                style={{
-                  fontSize: 11,
-                  color: "var(--text2)",
-                  whiteSpace: "nowrap",
-                  alignSelf: "flex-start",
-                  marginTop: 2,
-                }}
-              >
-                {new Date(r.created_at).toLocaleDateString("en-PH", {
-                  month: "short",
-                  day: "numeric",
-                })}
               </div>
             </div>
           ))}
@@ -341,9 +354,49 @@ export function HomePage({ reports, onNavigate, onExportExcel }: HomePageProps) 
           }}
         >
           <div style={{ fontSize: 40, marginBottom: 12 }}>📝</div>
-          <p style={{ fontSize: 16 }}>No notes yet. Add your first weekly note!</p>
+          <p style={{ fontSize: 15 }}>No notes yet. Add your first weekly note!</p>
         </div>
       )}
+
+      {/* ── Responsive styles ── */}
+      <style>{`
+        /* Stats: 4 cols → 2 cols → 1 col */
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+        }
+        .stat-value { font-size: 42px; }
+
+        @media (max-width: 860px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 480px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+          }
+          .stat-value { font-size: 28px !important; }
+        }
+
+        /* Actions: row → column on very small */
+        .actions-row {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+        @media (max-width: 400px) {
+          .actions-row {
+            flex-direction: column;
+          }
+          .actions-row button {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -32,11 +32,16 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
     fontFamily: "inherit",
     outline: "none",
     transition: "border-color 0.15s",
+    boxSizing: "border-box",
   });
 
+  const isDisabled = loading || !name.trim() || !note.trim();
+
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto" }}>
-      <div style={{ marginBottom: 40 }}>
+    <div className="addnote-wrap">
+
+      {/* ── Header ── */}
+      <div style={{ marginBottom: "clamp(24px, 4vw, 40px)" }}>
         <div
           style={{
             fontSize: 11,
@@ -44,29 +49,37 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
             textTransform: "uppercase",
             letterSpacing: "0.08em",
             fontWeight: 600,
-            marginBottom: 12,
+            marginBottom: 10,
           }}
         >
           New Entry
         </div>
-        <h1 className="serif" style={{ fontSize: 42, lineHeight: 1.1, marginBottom: 10 }}>
+        <h1
+          className="serif"
+          style={{
+            fontSize: "clamp(26px, 5vw, 42px)",
+            lineHeight: 1.1,
+            marginBottom: 8,
+          }}
+        >
           Add Weekly Note
         </h1>
-        <p style={{ color: "var(--text2)", fontSize: 15 }}>
+        <p style={{ color: "var(--text2)", fontSize: "clamp(13px, 2vw, 15px)" }}>
           Document your team member&apos;s weekly progress and accomplishments.
         </p>
       </div>
 
+      {/* ── Form Card ── */}
       <form onSubmit={handleSubmit}>
         <div
           style={{
             background: "var(--surface)",
             border: "1px solid var(--border)",
             borderRadius: 12,
-            padding: "32px",
+            padding: "clamp(20px, 4vw, 32px)",
             display: "flex",
             flexDirection: "column",
-            gap: 24,
+            gap: "clamp(16px, 3vw, 24px)",
           }}
         >
           {/* Name Field */}
@@ -95,8 +108,8 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
               required
             />
           </div>
-            
-          {/* Note Field */} 
+
+          {/* Note Field */}
           <div>
             <label
               style={{
@@ -116,7 +129,12 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
               onChange={(e) => setNote(e.target.value)}
               placeholder="Describe what was accomplished this week, blockers resolved, and upcoming plans…"
               rows={7}
-              style={{ ...inputStyle("note"), resize: "vertical", lineHeight: 1.7 }}
+              style={{
+                ...inputStyle("note"),
+                resize: "vertical",
+                lineHeight: 1.7,
+                minHeight: 140,
+              }}
               onFocus={() => setFocusedField("note")}
               onBlur={() => setFocusedField(null)}
               required
@@ -134,31 +152,26 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
           </div>
 
           {/* Submit */}
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div className="submit-row">
             <button
               type="submit"
-              disabled={loading || !name.trim() || !note.trim()}
+              disabled={isDisabled}
               style={{
                 padding: "13px 32px",
-                background:
-                  loading || !name.trim() || !note.trim()
-                    ? "var(--border)"
-                    : "var(--primary)",
-                color:
-                  loading || !name.trim() || !note.trim() ? "var(--text2)" : "#fff",
+                background: isDisabled ? "var(--border)" : "var(--primary)",
+                color: isDisabled ? "var(--text2)" : "#fff",
                 border: "none",
                 borderRadius: 8,
                 fontWeight: 600,
                 fontSize: 14,
-                cursor:
-                  loading || !name.trim() || !note.trim()
-                    ? "not-allowed"
-                    : "pointer",
+                cursor: isDisabled ? "not-allowed" : "pointer",
                 fontFamily: "inherit",
                 transition: "all 0.15s",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: 8,
+                whiteSpace: "nowrap",
               }}
             >
               {loading ? (
@@ -167,7 +180,7 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
                     style={{
                       width: 14,
                       height: 14,
-                      border: "2px solid var(--border)",
+                      border: "2px solid rgba(255,255,255,0.3)",
                       borderTopColor: "#fff",
                       borderRadius: "50%",
                       display: "inline-block",
@@ -184,7 +197,30 @@ export function AddNotePage({ onSubmit }: AddNotePageProps) {
         </div>
       </form>
 
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Center the form, full width on mobile */
+        .addnote-wrap {
+          max-width: 600px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        /* Submit button full-width on mobile */
+        .submit-row {
+          display: flex;
+          justify-content: flex-end;
+        }
+        @media (max-width: 480px) {
+          .submit-row {
+            justify-content: stretch;
+          }
+          .submit-row button {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
